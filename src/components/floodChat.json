@@ -1,0 +1,32 @@
+[
+    {
+    "user": "boss",
+    "text": "joke",
+    "id": 0
+    },
+    {
+    "user": "boss",
+    "text": "joke 2",
+    "id": 1
+    },
+    {
+    "user": "manager",
+    "text": "laught",
+    "id": 2
+    },
+    {
+    "user": "progammer",
+    "text": "laught",
+    "id": 3
+    },
+    {
+    "user": "progammer",
+    "text": "laught",
+    "id": 4
+    },
+    {
+    "user": "boss",
+    "text": "laught",
+    "id": 5
+    }
+]
