@@ -10,11 +10,13 @@ const stores = {
 
 function App() {
   return (
-    <Provider {...stores}>
-      <div className="container">
-        <Table Messages={stores.messages}/>
-      </div>
-    </Provider>
+    <div>
+      <Provider {...stores}>
+        <div className="container">
+          <Table Messages={stores.messages}/>
+        </div>
+      </Provider>
+    </div>
   );
 }
 
