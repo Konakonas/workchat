@@ -2,6 +2,7 @@ import React from 'react';
 import { Table } from './components/Table';
 import { MessageStore } from './components/ChatStore';
 import { Provider } from 'mobx-react'
+import 'materialize-css'
 
 
 const stores = {
@@ -10,11 +11,9 @@ const stores = {
 
 function App() {
   return (
-    <div>
+    <div className="container valign-wrapper">
       <Provider {...stores}>
-        <div className="container">
           <Table Messages={stores.messages}/>
-        </div>
       </Provider>
     </div>
   );

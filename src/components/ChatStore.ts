@@ -3,13 +3,13 @@ import { Message } from './Message'
 import { messages } from './Messages'
 import { observable, computed, action } from 'mobx'
 
-type oneMessage = {
-    person: Person;
-    text: string;
-}
-
-
 export class MessageStore { 
+
+    @observable
+    private isAuth: boolean = false;
+
+    @observable
+    private chatName: string = 'work';
 
     @observable
     private _messages: Message[] = [];
@@ -20,10 +20,19 @@ export class MessageStore {
     @observable
     private currentMessage: string = '';
 
+    @computed
+    get currentChatName() {
+        return this.chatName   
+    }
+
+    @computed
+    get auth() {
+        return this.isAuth    
+    }
 
     @observable
     private currentPerson: Person = {
-        user: 'me',
+        user: 'guest',
         uuid: '0',
     };
 
@@ -51,6 +60,17 @@ export class MessageStore {
     get message(): string {
         return this.currentMessage
     }
+    
+    @action
+    setAuth() {
+        const key = localStorage.getItem('user');
+        this.isAuth = key !== null ? true : false;
+    }
+
+    @action
+    setChatName(name: string) {
+        this.chatName = name;    
+    }
 
     @action
     setMessage() {
@@ -64,7 +84,7 @@ export class MessageStore {
 
     @action
     async init(channel: string) {
-        this._messages = messages[channel];
+        this.getMessageStore(this.chatName)
     }
 
     @action
@@ -74,16 +94,41 @@ export class MessageStore {
             text: message,
             id: this._messages.length
         }
-        this._messages.push(newMessage);       
+        this._messages.push(newMessage);
+        localStorage.setItem(this.chatName, JSON.stringify(this._messages));
     }
 
     @action
     changeMessage(message: string) {
         this._messages.filter((element) => element.id === this.currentMessageNumber)[0].text = message;
+        localStorage.setItem(this.chatName, JSON.stringify(this._messages));
     }
 
     @action
     deleteMessage(id: number) {
         this._messages = this._messages.filter((element) => element.id !== id);
+        localStorage.setItem(this.chatName, JSON.stringify(this._messages));
+    }
+
+    @action
+    setCurrentPerson(name: string ){
+        this.currentPerson = {
+            user: name,
+            uuid: '0',
+        }
+        localStorage.setItem('user', JSON.stringify(this.currentPerson));        
+    }
+
+    @action
+    getCurrentPerson() {
+        const key = localStorage.getItem('user');
+        this.currentPerson = key !== null ? JSON.parse(key) : [];
+    }
+
+    @action 
+    getMessageStore(channel: string) {
+        const key = localStorage.getItem(channel);
+        this._messages = key !== null ? JSON.parse(key) : messages[channel];   
+        localStorage.setItem(channel, JSON.stringify(this._messages));
     }
 }

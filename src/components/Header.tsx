@@ -12,7 +12,6 @@ type Props = {
 export const Header: React.FC<Props> = (props) => {
     return (
         <header className="header">
-             {/* <LogoHeader/> */}
              <RoomTitle chatroomName={props.chatroomName}/>
         </header>
     ); 
