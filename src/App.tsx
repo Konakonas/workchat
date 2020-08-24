@@ -12,9 +12,11 @@ const stores = {
 function App() {
   return (
     <div className="container valign-wrapper">
+      <div className="row">
       <Provider {...stores}>
           <Table Messages={stores.messages}/>
       </Provider>
+      </div>
     </div>
   );
 }

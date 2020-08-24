@@ -24,7 +24,7 @@ export class Table extends React.Component<Props> {
     private currentPerson: Person = this.props.Messages!.CurrentPerson;
 
     private messagesContainer: React.RefObject<HTMLDivElement> = React.createRef();
-
+    
     checkAuth() {
       this.props.Messages.setAuth();
     }
@@ -57,7 +57,7 @@ export class Table extends React.Component<Props> {
       if (!this.props.Messages.auth) {
         return <div className="row">
                   <h1>Вход в чат</h1>
-                  <div className="">
+                  <div className="col s6">
                     Введите имя:
                     <div className = "card-title" onLoad={() => this.checkAuth()}>
                       <input
@@ -76,7 +76,7 @@ export class Table extends React.Component<Props> {
       }
       this.props.Messages.getCurrentPerson();
         return (
-          <div className="row" onLoad={() => this.setStatus}>
+          <div className="" onLoad={() => this.setStatus}>
             <div className="">
               <Header 
                   chatroomName={this.chatroomName}
@@ -87,7 +87,7 @@ export class Table extends React.Component<Props> {
               <button className="btn-flat" onClick={() => this.setStatus('work')}>Work chat</button>
               <button className="btn-flat" onClick={() => this.setStatus('flood')}>Flood chat</button>
             </div>
-            <div className="card indigo lighten-5" ref={this.messagesContainer}>
+            <div className="messages" ref={this.messagesContainer}>
               {this.props.Messages?.currentMessages.map((message) => (
                 <Row
                   messages={this.props.Messages} 
@@ -95,11 +95,13 @@ export class Table extends React.Component<Props> {
                 />
               ))}
             </div >
-            <div className="">
+            <div className="message-box">
               <MessageBox 
               messageStore={this.props.Messages}
               message={this.props.Messages.selectedMessage}/>
+              <button className="btn-flat " onClick={() => {this.props.Messages.logout(); window.location.reload();} }>logout</button>
             </div>
+            
           </div>
         );
     };

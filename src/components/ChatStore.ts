@@ -125,6 +125,11 @@ export class MessageStore {
         this.currentPerson = key !== null ? JSON.parse(key) : [];
     }
 
+    @action
+    logout() {
+        localStorage.removeItem('user');
+    }
+
     @action 
     getMessageStore(channel: string) {
         const key = localStorage.getItem(channel);

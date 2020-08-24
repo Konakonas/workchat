@@ -24,7 +24,7 @@ export class MessageBox extends React.Component<Props> {
       return (
         <div>
                 <input
-                    className="my-2 mx-2"
+                    className=""
                     type="text"
                     value={this.state.value}
                     onChange={(event) =>
@@ -32,7 +32,7 @@ export class MessageBox extends React.Component<Props> {
                     }
                   />
                 <button
-                className="my-2 mx-2" 
+                className="btn waves-effect waves-light" 
                 onClick={() => {this.sendMessage()}}>Отправить</button>
         </div>)
     }

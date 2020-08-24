@@ -29,3 +29,12 @@
 html, body, .my-wrapper {
   height: 100%;
 }
+
+.message-box {
+  float:left;
+  height: 400px;
+}
+
+.messages {
+    height: 400px;
+}
